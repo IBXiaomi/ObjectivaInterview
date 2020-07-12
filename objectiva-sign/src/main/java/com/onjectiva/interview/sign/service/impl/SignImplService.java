@@ -34,8 +34,6 @@ public class SignImplService extends BaseIntegralService implements SignService 
      */
     public void getIntegralFromSign(User user, Integral integral) {
         int signNumber = user.getSignNumber();
-//        int integralNumber = signNumber < SignConstant.SIGN_NUMBER_THIRTY ?
-//                signNumber * SignConstant.SIGN_NUMBER_TEN : signNumber * SignConstant.SIGN_NUMBER_TWENTY;
         integral.setIntegralId(user.getIntegralId());
         Date createDate = integralService.getIntegralCreateDate(integralService.getIntegralByIntegralId(integral));
         int integralNumber = differentDate(createDate, user.getSignDate()) > 1L ?
