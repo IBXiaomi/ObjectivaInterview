@@ -57,4 +57,26 @@ public class IntegralServiceImpl implements IntegralService {
     public List<String> getIntegralConsumerRecord(Integral integral) {
         return integralMapper.findIntegralConsumerRecord(integral);
     }
+
+    /**
+     * 获取积分创建时间
+     *
+     * @param integral 积分id
+     * @return
+     */
+    public Date getIntegralCreateDate(Integral integral) {
+        return integralMapper.findIntegralCreateDate(integral);
+    }
+
+    /**
+     * 根据积分id获取积分对象
+     *
+     * @param integral 积分id
+     * @return
+     */
+    public Integral getIntegralByIntegralId(Integral integral) {
+        return integralMapper.findIntegralByIntegralId(integral);
+    }
+
+
 }

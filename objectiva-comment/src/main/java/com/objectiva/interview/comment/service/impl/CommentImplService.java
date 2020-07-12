@@ -4,8 +4,6 @@ import com.objectiva.interview.comment.service.CommentService;
 import com.objectiva.interview.entity.Integral;
 import com.objectiva.interview.entity.User;
 import com.objectiva.interview.integral.common.BaseIntegralService;
-import com.objectiva.interview.integral.service.IntegralService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

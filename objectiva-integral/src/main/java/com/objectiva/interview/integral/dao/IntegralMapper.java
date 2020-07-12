@@ -60,5 +60,13 @@ public interface IntegralMapper {
      * @param integral 积分对象
      * @return
      */
-    BigDecimal findIntegralByIntegralId(Integral integral);
+    BigDecimal findIntegralByIntegral(Integral integral);
+
+    /**
+     * 查找积分对象
+     *
+     * @param integral 积分id
+     * @return
+     */
+    Integral findIntegralByIntegralId(Integral integral);
 }

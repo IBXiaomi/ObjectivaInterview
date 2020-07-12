@@ -49,4 +49,9 @@ public class User implements Serializable {
      * 总积分数
      */
     private BigDecimal sumIntegral;
+
+    /**
+     * 签到时间
+     */
+    private String signDate;
 }

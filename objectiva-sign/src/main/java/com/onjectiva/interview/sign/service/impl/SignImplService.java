@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 签到获取积分
@@ -31,7 +34,11 @@ public class SignImplService extends BaseIntegralService implements SignService 
      */
     public void getIntegralFromSign(User user, Integral integral) {
         int signNumber = user.getSignNumber();
-        int integralNumber = signNumber < SignConstant.SIGN_NUMBER_THIRTY ?
+//        int integralNumber = signNumber < SignConstant.SIGN_NUMBER_THIRTY ?
+//                signNumber * SignConstant.SIGN_NUMBER_TEN : signNumber * SignConstant.SIGN_NUMBER_TWENTY;
+        integral.setIntegralId(user.getIntegralId());
+        Date createDate = integralService.getIntegralCreateDate(integralService.getIntegralByIntegralId(integral));
+        int integralNumber = differentDate(createDate, user.getSignDate()) > 1L ?
                 signNumber * SignConstant.SIGN_NUMBER_TEN : signNumber * SignConstant.SIGN_NUMBER_TWENTY;
         super.addIntegral(integral, new BigDecimal(String.valueOf(integralNumber)));
     }
@@ -44,5 +51,21 @@ public class SignImplService extends BaseIntegralService implements SignService 
      */
     public void setIntegralExpirationDate(Integral integral, int expirationTime) {
         super.setIntegralExpirationDate(integral, SignConstant.EXPIRATION_TIME);
+    }
+
+    /**
+     * 获取两个日期之间间隔的天数
+     *
+     * @param oldDate       之前的签到
+     * @param newDateString 新的签到
+     */
+    private Long differentDate(Date oldDate, String newDateString) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date newDate = sdf.parse(newDateString);
+            return (newDate.getTime() - oldDate.getTime()) / (1000 * 60 * 60 * 24);
+        } catch (ParseException e) {
+            throw new RuntimeException("parse date to time exception" + e.getMessage());
+        }
     }
 }

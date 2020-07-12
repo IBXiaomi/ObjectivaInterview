@@ -38,4 +38,20 @@ public interface IntegralService {
      * @return integralConsumerRecord
      */
     List<String> getIntegralConsumerRecord(Integral integral);
+
+    /**
+     * 获取积分创建时间
+     *
+     * @param integral 积分id
+     * @return
+     */
+    Date getIntegralCreateDate(Integral integral);
+
+    /**
+     * 根据积分id获取积分对象
+     *
+     * @param integral 积分id
+     * @return
+     */
+    Integral getIntegralByIntegralId(Integral integral);
 }

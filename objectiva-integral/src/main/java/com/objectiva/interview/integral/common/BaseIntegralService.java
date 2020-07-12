@@ -28,7 +28,7 @@ public abstract class BaseIntegralService implements IntegralService {
      * @param integral 积分
      */
     public void addIntegral(Integral integral, BigDecimal integralNumber) {
-        BigDecimal oldIntegral = integralMapper.findIntegralByIntegralId(integral);
+        BigDecimal oldIntegral = integralMapper.findIntegralByIntegral(integral);
         BigDecimal bigDecimal = integralNumber.add(oldIntegral);
         integral.setCommentIntegral(bigDecimal);
         integralMapper.insertIntegral(integral);
@@ -77,6 +77,26 @@ public abstract class BaseIntegralService implements IntegralService {
      * @return integralConsumerRecord
      */
     public List<String> getIntegralConsumerRecord(Integral integral) {
+        return null;
+    }
+
+    /**
+     * 获取积分创建时间
+     *
+     * @param integral 积分id
+     * @return
+     */
+    public Date getIntegralCreateDate(Integral integral) {
+        return null;
+    }
+
+    /**
+     * 获取积分创建时间
+     *
+     * @param integral 积分id
+     * @return
+     */
+    public Integral getIntegralByIntegralId(Integral integral) {
         return null;
     }
 }
