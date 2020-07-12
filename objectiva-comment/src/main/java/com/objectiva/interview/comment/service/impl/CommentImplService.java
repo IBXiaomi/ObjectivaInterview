@@ -24,8 +24,6 @@ public class CommentImplService extends BaseIntegralService implements CommentSe
      */
     private static final int NUMBER = 5;
 
-    @Autowired
-    IntegralService integralService;
 
     /**
      * 评论获取积分，并设置过期时间

@@ -73,6 +73,7 @@ public class OrderServiceImpl extends BaseIntegralService implements OrderServic
         int result = sumIntegral.compareTo(new BigDecimal("0"));
         if (result > 0) {
             // 默认不进行四舍五入,直接去除掉小数点后面的值
+            // 第一个参数表示除数，第二个参数表示保留几位小数，第三个参数表示使用的模式
             BigDecimal divide = sumIntegral.divide(ORDER_NUMBER, 0, BigDecimal.ROUND_DOWN);
             order.setOrderAmount(order.getOrderAmount() - divide.intValue());
             BigDecimal newIntegral = ORDER_NUMBER.multiply(divide);
