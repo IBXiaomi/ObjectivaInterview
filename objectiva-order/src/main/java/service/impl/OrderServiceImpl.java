@@ -74,10 +74,16 @@ public class OrderServiceImpl extends BaseIntegralService implements OrderServic
         if (result > 0) {
             // 默认不进行四舍五入,直接去除掉小数点后面的值
             // 第一个参数表示除数，第二个参数表示保留几位小数，第三个参数表示使用的模式
-            BigDecimal divide = sumIntegral.divide(ORDER_NUMBER, 0, BigDecimal.ROUND_DOWN);
+            BigDecimal divide = sumIntegral.divide(ORDER_NUMBER);
+            int subtract = order.getOrderAmount() - divide.intValue();
+            // 积分抵消金额大于实际花销
+            if (subtract < 0) {
+                order.setOrderAmount(0);
+                user.setSumIntegral(new BigDecimal((divide.intValue() - order.getOrderAmount()) * 10));
+            }
+            // 积分全部抵消
             order.setOrderAmount(order.getOrderAmount() - divide.intValue());
-            BigDecimal newIntegral = ORDER_NUMBER.multiply(divide);
-            user.setSumIntegral(newIntegral);
+            user.setSumIntegral(new BigDecimal("0"));
             // 将订单金额和减免后的积分插入数据库中
         }
     }
